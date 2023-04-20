@@ -1,22 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState()
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Lifting Up State</h1>
+        {!user && <><section style={{ border: '2px solid red', width: '100%', padding: '16px'}}>
+          <Signup setUser={setUser} />
+        </section>
+        <hr style={{width: '100%'}} />
+        <section style={{ border: '2px solid yellow', width: '100%', padding: '16px'}}>
+          <Login setUser={setUser} />
+        </section></>}
+        {user && <section style={{ border: '2px solid blue', width: '100%', padding: '16px'}}>
+          <Dashboard user={user} setUser={setUser} />
+        </section>}
       </header>
     </div>
   );
